@@ -8,11 +8,11 @@ class GameManager(
     val gameMap: GameMap
 ) {
     private val surprises: List<Any> = listOf(
-//        Nitro(6),
-//        PitStop(6),
-//        GuidedMissile(8),
-//        Caltrop(3),
-//        FlameThrower(4, 5),
+        Nitro(6),
+        PitStop(6),
+        GuidedMissile(8),
+        Caltrop(3),
+        FlameThrower(4, 5),
         IceThrower(4)
     )
 
@@ -44,16 +44,18 @@ class GameManager(
             finishers.add(player)
         }
 
-        gameMap.cells[newPosition].effect?.let {
+
+    }
+
+    fun checkEffect(player: Player) {
+        gameMap.cells[player.position()].effect?.let {
             when(it) {
                 is Caltrop -> it.apply(this, player)
             }
         }
 
-        if (gameMap.cells[newPosition].isSurprise) {
-            val surprise = surprises[Random.nextInt(surprises.size)]
-
-            when (surprise) {
+        if (gameMap.cells[player.position()].isSurprise) {
+            when (val surprise = surprises[Random.nextInt(surprises.size)]) {
                 is Nitro -> surprise.apply(this, player)
                 is PitStop -> surprise.apply(this, player)
                 is GuidedMissile -> {
@@ -113,6 +115,9 @@ class GameManager(
     fun applyPlayerEffect(player: Player) {
         when (val effect = player.effect) {
             is GuidedMissile -> effect.apply(this, player)
+            is FlameThrower -> effect.apply(this, player)
+            is IceThrower -> effect.apply(this, player)
+            is Caltrop -> effect.apply(this, player)
             else -> println("Nada para usar.")
         }
     }

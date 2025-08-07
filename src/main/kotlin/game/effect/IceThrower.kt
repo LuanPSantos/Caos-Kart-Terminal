@@ -13,5 +13,6 @@ class IceThrower (
         attacked.forEach { it.canPlay = false }
 
         println("$icon ${attacked.size} inimigos congelados!")
+        player.effect = null
     }
 }

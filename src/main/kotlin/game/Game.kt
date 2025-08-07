@@ -17,7 +17,7 @@ class Game(
         while (true) {
             println(paint("********** Início da rodada ${gameManager.nextRound()} **********", TXT_BLUE))
             println()
-            sleep(1000)
+            sleep(500)
             gameManager.players.forEach { currentPlayer ->
 
                 if(!currentPlayer.canPlay) {
@@ -53,8 +53,9 @@ class Game(
                 gameManager.movePlayer(currentPlayer, dice)
 
                 gameMap.render()
-                
-                println()
+
+                gameManager.checkEffect(currentPlayer)
+
                 println("Próximo jogador: ${gameManager.nextPlayer()}. Digite Enter para continuar...")
                 readln()
             }

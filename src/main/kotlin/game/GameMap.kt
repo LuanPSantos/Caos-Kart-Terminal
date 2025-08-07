@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 class GameMap(
     private val players: List<Player>,
-    val size: Int = 30,
+    val size: Int = 60,
     luckCellPercentage: Int = 25
 ) {
 

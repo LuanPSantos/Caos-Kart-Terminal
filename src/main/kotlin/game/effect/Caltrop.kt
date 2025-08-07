@@ -10,5 +10,7 @@ class Caltrop(
     override fun apply(gameManager: GameManager, player: Player) {
 
         gameManager.movePlayer(player, -damage)
+
+        player.effect = null
     }
 }

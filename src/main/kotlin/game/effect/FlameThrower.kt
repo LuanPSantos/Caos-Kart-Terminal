@@ -14,5 +14,7 @@ class FlameThrower (
         attacked.forEach { gameManager.movePlayer(it, -damage) }
 
         println("$icon ${attacked.size} inimigos queimados!")
+
+        player.effect = null
     }
 }

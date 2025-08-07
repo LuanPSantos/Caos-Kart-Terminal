@@ -13,8 +13,8 @@ class GuidedMissile(
 
     override fun apply(gameManager: GameManager, player: Player) {
         val enemies = gameManager.enemiesOf(player)
-        println("Você usou o $icon $name.")
-        println("Escolha um jogador como alvo e ele voltará $damage casas: ${enemies.map { "[${it.number}]${it.render()}, " }}")
+
+        println("$icon $name: Escolha um jogador como alvo e ele voltará $damage casas: ${enemies.map { "[${it.number}]${it.render()}, " }}")
 
         var enemy: Player?
         do {
@@ -27,6 +27,7 @@ class GuidedMissile(
         } while (enemy == null)
 
         gameManager.movePlayer(enemy, -damage)
+        println("Você usou o $icon $name e o $enemy voltou $damage casas")
         player.effect = null
     }
 }
